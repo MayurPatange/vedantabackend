@@ -10,8 +10,16 @@ mongoose.connect("mongodb+srv://mayurmspatange:hUZJVJvGUOFWH3BU@vedanta.v2mtfxr.
 
 async function addAppointment(appointment) {
     return new Promise((resolve, reject) => {
+      const appointmentDetails = {
+        doctorName: appointment.doctorName,
+        service: appointment.service,
+        status: appointment.status,
+        appointmentTime: appointment.appointTime,
+        appointmentDate: appointment.date,
+        appointmentDuration: appointment.duration
+      }
         const connModel = mongoose.model("appointment", model.appointment);
-        const newDoc = new connModel(appointment);
+        const newDoc = new connModel(appointmentDetails);
         newDoc.save((error, result) => {
             if (error) {
                 console.log(error);
