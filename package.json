@@ -1,7 +1,7 @@
 {
-  "name": "taskmanger",
-  "version": "1.0.0",
-  "description": "CRUD operation for task manager ",
+  "name": "vedanta",
+  "version": "1.0.1",
+  "description": "vedanta backend service",
   "main": "app.js",
   "scripts": {
     "test": "nyc jasmine",
