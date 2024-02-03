@@ -22,8 +22,8 @@ async function addAppointment(appointment) {
         const connModel = mongoose.model("appointment", model.appointment);
         const newDoc = new connModel(appointmentDetails);
         newDoc.save((err, result) => {
-            if (error) {
-                console.log(error);
+            if (err) {
+                console.log(err);
                 reject({ status: 500, message: "Internal server Error" });
             } else {
                 console.log("add appointment to database", result);
@@ -60,11 +60,15 @@ async function getAllAppointment() {
 // console.log(currentDate); // "17-6-2022"
 
 
-async function getAppointmentsByPatientName(name) {
+async function getAppointmentsByQuery(query) {
     return new Promise((resolve, reject) => {
       const connModel = mongoose.model("appointment", model.appointment);
+      // const query = {
+
+      // }
+      // params = 
       // connModel.find({ "appointmentDate": "1994/11/25",},{ _id: 0, __v: 0 }, function (err, docs) {
-      connModel.find({ "patientName": name,},{ _id: 0, __v: 0 }, function (err, docs) {
+      connModel.find( query ,{ _id: 0, __v: 0 }, function (err, docs) {
         if (err) {
           console.log(err);
           reject ({ status: 500, message: "Internal server Error" });
@@ -79,5 +83,5 @@ async function getAppointmentsByPatientName(name) {
 module.exports = {
     addAppointment,
     getAllAppointment,
-    getAppointmentsByPatientName
+    getAppointmentsByQuery
 };

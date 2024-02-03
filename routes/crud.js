@@ -42,16 +42,18 @@ router.post('/appointments/addAppointment', async (req, res) => {
 });
 
 
-router.get('/appointments', async (req, res) => {
-   let ress = await appointment.getAllAppointment();
-   console.log("get Appointments ", ress)
-   res.status(200).send(ress)
-});
 
-router.get('/appointments/:name', async(req, res) => {
-   console.log("req.params.name",req.params.name)
-   let ress = await appointment.getAppointmentsByPatientName(req.params.name);
-   res.status(200).send(ress)
+// not require
+// router.get('/appointments', async (req, res) => {
+//    let ress = await appointment.getAllAppointment();
+//    console.log("get Appointments ", ress)
+//    res.status(200).send(ress)
+// });
+
+router.get('/getAppointmentsByQuery', async(req, res) => {
+   console.log("req.params",JSON.stringify(req.query));
+   let ress = await appointment.getAppointmentsByQuery(req.query);
+   res.status(200).send(ress);
 });
 
 
