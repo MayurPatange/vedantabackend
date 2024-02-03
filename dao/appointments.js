@@ -49,25 +49,9 @@ async function getAllAppointment() {
     
 }
 
-// const date = new Date();
-
-// let day = date.getDate();
-// let month = date.getMonth() + 1;
-// let year = date.getFullYear();
-
-// // This arrangement can be altered based on how we want the date's format to appear.
-// let currentDate = `${day}/${month}/${year}`;
-// console.log(currentDate); // "17-6-2022"
-
-
 async function getAppointmentsByQuery(query) {
     return new Promise((resolve, reject) => {
       const connModel = mongoose.model("appointment", model.appointment);
-      // const query = {
-
-      // }
-      // params = 
-      // connModel.find({ "appointmentDate": "1994/11/25",},{ _id: 0, __v: 0 }, function (err, docs) {
       connModel.find( query ,{ _id: 0, __v: 0 }, function (err, docs) {
         if (err) {
           console.log(err);
