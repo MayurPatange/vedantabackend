@@ -2,7 +2,8 @@
 const mongoose = require("mongoose"); 
 
 const vitals = new mongoose.Schema({ 
-  bp: { type: String, required: false },
+  lbp: { type: String, required: false },
+  hbp: { type: String, required: false },
   height: { type: String, required: false },
   weight: { type: String, required: false },
   temperature: { type: String, required: false },
