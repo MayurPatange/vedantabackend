@@ -41,7 +41,11 @@ router.post('/appointments/addAppointment', async (req, res) => {
    res.send(ress);
 });
 
-
+router.get('/getAppointments', async(req, res) => {
+   console.log("req.params",JSON.stringify(req.query));
+   let ress = await appointment.getAppointmentsByQuery(req.query);
+   res.status(200).send(ress);
+});
 
 // not require
 // router.get('/appointments', async (req, res) => {
@@ -49,16 +53,6 @@ router.post('/appointments/addAppointment', async (req, res) => {
 //    console.log("get Appointments ", ress)
 //    res.status(200).send(ress)
 // });
-
-router.get('/getAppointmentsByQuery', async(req, res) => {
-   console.log("req.params",JSON.stringify(req.query));
-   let ress = await appointment.getAppointmentsByQuery(req.query);
-   res.status(200).send(ress);
-});
-
-
-
-
 
 
 // ***********************    prescription  *********************** // 
@@ -71,18 +65,20 @@ router.post('/prescription/addPrescription', async (req, res) => {
    res.send(ress);
 });
 
-
-router.get('/prescription', async (req, res) => {
-   let ress = await prescription.getAllPrescription();
-   console.log("get Appointments ", ress)
+router.get('/getPrescriptions', async(req, res) => {
+   console.log("req.params",JSON.stringify(req.query));
+   let ress = await prescription.getPrescriptions(req.query);
    res.status(200).send(ress)
 });
 
-router.get('/prescription/:name', async(req, res) => {
-   console.log("req.params.name",req.params.name)
-   let ress = await prescription.getPrescriptionsByPatientName(req.params.name);
-   res.status(200).send(ress)
-});
+// router.get('/prescription', async (req, res) => {
+//    let ress = await prescription.getAllPrescription();
+//    console.log("get Appointments ", ress)
+//    res.status(200).send(ress)
+// });
+
+
+
 
 module.exports = router;
 
