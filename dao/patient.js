@@ -1,10 +1,11 @@
 const mongoose = require("mongoose"); 
 const model = require("../Models/patient") 
+const constants = require('../helper/constants');
 
 // Connect to MongoDB
-// mongoose.connect("mongodb://127.0.0.1:27017/Vedanta", { useNewUrlParser: true });
-mongoose.connect("mongodb+srv://mayurmspatange:hUZJVJvGUOFWH3BU@vedanta.v2mtfxr.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true });
 
+// mongodb+srv://mayurmspatange:hUZJVJvGUOFWH3BU@vedanta.v2mtfxr.mongodb.net/?retryWrites=true&w=majority
+mongoose.connect(constants.constants.MONGO_BASE_URL, { useNewUrlParser: true });
 
 // updateOne({ email: 'test2@google.com' }, { email: 'test@google.com' });
 

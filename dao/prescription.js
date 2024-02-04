@@ -1,13 +1,12 @@
 
 const mongoose = require("mongoose");  //hUZJVJvGUOFWH3BU
 const model = require("../Models/prescription") 
+const constants = require('../helper/constants');
 
 // Connect to MongoDB
 
 // mongodb+srv://mayurmspatange:hUZJVJvGUOFWH3BU@vedanta.v2mtfxr.mongodb.net/?retryWrites=true&w=majority
-mongoose.connect("mongodb+srv://mayurmspatange:hUZJVJvGUOFWH3BU@vedanta.v2mtfxr.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true });
-// mongoose.connect("mongodb://127.0.0.1:27017/Vedanta", { useNewUrlParser: true });
-
+mongoose.connect(constants.constants.MONGO_BASE_URL, { useNewUrlParser: true });
 async function addPrescription(Prescription) {
     return new Promise((resolve, reject) => {
         const connModel = mongoose.model("prescription", model.prescription);
