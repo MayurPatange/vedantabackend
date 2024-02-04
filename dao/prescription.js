@@ -24,20 +24,20 @@ async function addPrescription(Prescription) {
     });
 }
 
-async function getAllPrescription() {
-    return new Promise((resolve, reject) => {
-      const connModel = mongoose.model("prescription", model.prescription);
-        connModel.find({},{ _id: 0, __v: 0 }, function (err, docs) {
-        if (err) {
-          console.log(error);
-          reject ({ status: 500, message: "Internal server Error" });
-        } else {
-          console.log("prescription list collection",docs);
-          resolve (docs);
-        }
-      });
-    });
-}
+// async function getAllPrescription() {
+//     return new Promise((resolve, reject) => {
+//       const connModel = mongoose.model("prescription", model.prescription);
+//         connModel.find({},{ _id: 0, __v: 0 }, function (err, docs) {
+//         if (err) {
+//           console.log(error);
+//           reject ({ status: 500, message: "Internal server Error" });
+//         } else {
+//           console.log("prescription list collection",docs);
+//           resolve (docs);
+//         }
+//       });
+//     });
+// }
 
 async function getPrescriptions(query) {
     return new Promise((resolve, reject) => {
@@ -56,6 +56,6 @@ async function getPrescriptions(query) {
 
 module.exports = {
     addPrescription,
-    getAllPrescription,
+    // getAllPrescription,
     getPrescriptions
 };
