@@ -16,8 +16,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
 
-
-
 // for testing purposes
 var testRoutes = require('./routes/crud');
 
@@ -29,5 +27,4 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCs
 // to show on port no 3000
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-  
 })

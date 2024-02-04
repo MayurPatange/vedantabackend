@@ -25,6 +25,7 @@ const medicine = new mongoose.Schema({
 
 const referred = new mongoose.Schema({ 
   doctorName: { type: String, required: false },
+  doctorSpeciality: { type: String, required: false },
   email: { String: String, required: false },
   phoneNumber: { type: String, required: false }
 })
