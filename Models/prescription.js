@@ -39,6 +39,12 @@ const systematicExamination = new mongoose.Schema({
   ent: { String: String, required: false }
 })
 
+const investigations = new mongoose.Schema({ 
+  investigations: { type: String, required: false },
+  units: { String: String, required: false },
+  today: { String: String, required: false }
+})
+
 var prescription = new mongoose.Schema({
   patientId:{ type: String, required: false },
   patientName:{ type: String, required: false },
@@ -46,13 +52,15 @@ var prescription = new mongoose.Schema({
   vitals: { type: vitals, required: false },
   complaints:{ type: String, required: false },
   pastHistory: { type: String, required: false },
-  investigations : { type: String, required: false },
+  investigations : { type: [investigations], required: false },
   diagnosis:{ type: String, required: false },
   preferredLanguage: { type: String, required: false },
   medicine: { type: [medicine], required: false },
   advice: { type: String, required: false },
   testRequested: { type: String, required: false },
-  nextVisit: { type: Date, required: false },
+  testRequestedByWhen : { type: String, required: false },
+  // nextVisit: { type: Date, required: false },
+  nextVisit: { type: String, required: false },
   referredTo: { type: [referred], required: false },
   systematicExamination:{type: systematicExamination , required: false }
 });
