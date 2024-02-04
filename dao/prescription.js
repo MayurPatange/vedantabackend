@@ -39,10 +39,10 @@ async function getAllPrescription() {
     });
 }
 
-async function getPrescriptionsByPatientName(name) {
+async function getPrescriptions(query) {
     return new Promise((resolve, reject) => {
       const connModel = mongoose.model("prescription", model.prescription);
-      connModel.find({ "patientName": name, "visitNumber": 3},{ _id: 0, __v: 0 }, function (err, docs) {
+      connModel.find(query , { _id: 0, __v: 0 }, function (err, docs) {
         if (err) {
           console.log(error);
           reject ({ status: 500, message: "Internal server Error" });
@@ -57,5 +57,5 @@ async function getPrescriptionsByPatientName(name) {
 module.exports = {
     addPrescription,
     getAllPrescription,
-    getPrescriptionsByPatientName
+    getPrescriptions
 };
