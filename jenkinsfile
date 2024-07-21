@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    environment {
+        // Assuming you have configured SonarQube server in Jenkins
+        // Set the SonarQube environment variables
+        SONARQUBE_SCANNER_HOME = tool name: 'sonarscanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        SONAR_HOST_URL = 'http://localhost:9000/:9000'
+        SONAR_LOGIN = credentials('sonarqube-token') // Assuming you have stored your token in Jenkins credentials
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from your SCM
+                git url: 'https://your-repo-url.git', branch: 'main'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build your project, for example with Maven
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('YourSonarQubeServerName') {
+                    // Run SonarQube analysis
+                    sh '''
+                        ${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner \
+                        -Dsonar.projectKey=your-project-key \
+                        -Dsonar.projectName=your-project-name \
+                        -Dsonar.projectVersion=1.0 \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=${SONAR_HOST_URL} \
+                        -Dsonar.login=${SONAR_LOGIN}
+                    '''
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    // Wait for the analysis to be completed and check the quality gate status
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Clean up workspace
+            cleanWs()
+        }
+    }
+}
