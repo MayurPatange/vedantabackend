@@ -1,4 +1,4 @@
-FROM node:19-alpine
+FROM node:22.5.0-alpine
 # Create app directory to use
 WORKDIR /app
 #coping json file to app folder
